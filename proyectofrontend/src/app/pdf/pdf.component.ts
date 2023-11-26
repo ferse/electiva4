@@ -30,6 +30,7 @@ export class PdfComponent {
       content: [
         {
           table: {
+            widths: ['*','*', '*', '*'], 
             headerRows: 1,
             body: [
               ['Id','Titulo', 'Autor', 'Editorial'],
@@ -38,7 +39,7 @@ export class PdfComponent {
           },
         }
       ],
-    }
+    };
     const pdf = pdfMake.createPdf(pdfDefinition);
     pdf.open()
   }
