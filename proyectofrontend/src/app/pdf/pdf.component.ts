@@ -16,23 +16,30 @@ export class PdfComponent {
   
   datos: any;
 
-  createPdf(){
+  ngOnInit() {
     this.http.get("http://localhost:9090/api/venta")
       .subscribe(
         resultado => {
           this.datos = resultado;
         }
       );
+  }
+
+  createPdf(){
     const pdfDefinition: any = {
       content: [
         {
-          text: 'Hola Mundo!'
+          table: {
+            headerRows: 1,
+            body: [
+              ['Id','Titulo', 'Autor', 'Editorial'],
+              ...this.datos.map((row) => [row.id, row.titulo, row.autor, row.editorial]),
+            ],
+          },
         }
-      ]
+      ],
     }
-
     const pdf = pdfMake.createPdf(pdfDefinition);
     pdf.open()
-
   }
 }
