@@ -1,24 +1,24 @@
 <table mat-table [dataSource]="datos" class="mat-elevation-z8" #tabla1>
 
-  <ng-container matColumnDef="cliente">
-    <th mat-header-cell *matHeaderCellDef> Cliente </th>
-    <td mat-cell *matCellDef="let venta"> {{venta.cliente}} </td>
+  <ng-container matColumnDef="titulo">
+    <th mat-header-cell *matHeaderCellDef> Titulo </th>
+    <td mat-cell *matCellDef="let libro"> {{libro.titulo}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="total">
-    <th mat-header-cell *matHeaderCellDef> Total </th>
-    <td mat-cell *matCellDef="let venta"> {{venta.total}} </td>
+  <ng-container matColumnDef="autor">
+    <th mat-header-cell *matHeaderCellDef> Autor </th>
+    <td mat-cell *matCellDef="let libro"> {{libro.autor}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="factura">
-    <th mat-header-cell *matHeaderCellDef> Factura </th>
-    <td mat-cell *matCellDef="let venta"> {{venta.factura}} </td>
+  <ng-container matColumnDef="editorial">
+    <th mat-header-cell *matHeaderCellDef> Editorial </th>
+    <td mat-cell *matCellDef="let libro"> {{libro.editorial}} </td>
   </ng-container>
 
   <ng-container matColumnDef="borrar">
     <th mat-header-cell *matHeaderCellDef> Borra? </th>
-    <td mat-cell *matCellDef="let venta">
-      <button mat-raised-button color="warn" focusable="false" (click)="borrarVenta(venta.id)">
+    <td mat-cell *matCellDef="let libro">
+      <button mat-raised-button color="warn" focusable="false" (click)="borrarVenta(libro.id)">
         Borra?
       </button>
     </td>
@@ -26,8 +26,8 @@
 
   <ng-container matColumnDef="seleccionar">
     <th mat-header-cell *matHeaderCellDef> Seleccionar </th>
-    <td mat-cell *matCellDef="let venta">
-      <button mat-raised-button color="accent" focusable="false" (click)="seleccionar(venta)">
+    <td mat-cell *matCellDef="let libro">
+      <button mat-raised-button color="accent" focusable="false" (click)="seleccionar(libro)">
         Seleccionar
       </button>
     </td>
@@ -37,18 +37,18 @@
   <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
 </table>
 <div class="contenedor">
-  <input type="hidden" [(ngModel)]="ventaselect.id" name="id">
+  <input type="hidden" [(ngModel)]="libroselect.id" name="id">
   
   <mat-form-field>
-    <input matInput [(ngModel)]="ventaselect.cliente" type="text" placeholder="Ingrese nombre del cliente">
+    <input matInput [(ngModel)]="libroselect.titulo" type="text" placeholder="Ingrese titulo del libro">
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput [(ngModel)]="ventaselect.total" type="number" placeholder="Ingrese total">
+    <input matInput [(ngModel)]="libroselect.autor" type="text" placeholder="Ingrese autor del libro">
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput [(ngModel)]="ventaselect.factura" type="text" placeholder="Ingrese número de factura">
+    <input matInput [(ngModel)]="libroselect.editorial" type="text" placeholder="Ingrese editorial del libro  ">
   </mat-form-field>
 
   <button mat-raised-button color="primary" (click)="guardar()">Guardar</button>

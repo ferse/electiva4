@@ -1,12 +1,12 @@
 module.exports = (sequelize, Sequelize) => {
-    const Venta = sequelize.define("Venta", {
-        cliente: {
+    const Libro = sequelize.define("Libro", {
+        titulo: {
             type: Sequelize.STRING
         },
-        total: {
-            type: Sequelize.BIGINT
+        autor: {
+            type: Sequelize.STRING
         },
-        factura: {
+        editorial: {
             type: Sequelize.STRING
         },
         id: {
@@ -15,5 +15,5 @@ module.exports = (sequelize, Sequelize) => {
             autoIncrement: true
         }
     });
-    return Venta;
+    return Libro;
 };

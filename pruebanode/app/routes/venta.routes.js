@@ -1,14 +1,14 @@
 module.exports = app => {
-    const venta = require("../controllers/ventadao.controller.js");
+    const libro = require("../controllers/ventadao.controller.js");
     var router = require("express").Router();
-    router.post("/", venta.create);
-    router.get("/", venta.findAll);
-    router.get("/:id", venta.findOne);
+    router.post("/", libro.create);
+    router.get("/", libro.findAll);
+    router.get("/:id", libro.findOne);
 
     // Agregar una ruta para la eliminación de ventas por ID
-    router.delete("/:id", venta.delete);
+    router.delete("/:id", libro.delete);
 
     // Agregar una ruta para la edición de ventas por ID
-    router.put("/:id", venta.update)
+    router.put("/:id", libro.update)
     app.use('/api/venta', router);
 };

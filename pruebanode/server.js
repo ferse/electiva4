@@ -40,6 +40,6 @@ require("./app/routes/venta.routes")(app);
 const PORT = process.env.PORT || 9090;
 sequelize.sync().then(result => {
     app.listen(PORT, () => {
-    console.log('Servidor corriendo en puerto 9090.');
+    console.log('Servidor corriendo en puerto '+PORT);
     });
 });

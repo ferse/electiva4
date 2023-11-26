@@ -1,104 +1,104 @@
 const db = require("../models");
-const Ventas = db.Ventas;
+const Libros = db.Libro;
 const Op = db.Sequelize.Op;
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.factura) {
+    if (!req.body.titulo) {
         res.status(400).send({
-            message: "Debe enviar numero de factura!"
+            message: "Debe enviar el titulo del libro!"
         });
         return;
     }
     // crea una venta
-    const venta = {
-        cliente: req.body.cliente,
-        factura: req.body.factura,
-        total: req.body.total
+    const libro = {
+        titulo: req.body.titulo,
+        autor: req.body.autor,
+        editorial: req.body.editorial
     };
     // Guardamos a la base de datos
-    Ventas.create(venta)
+    Libros.create(libro)
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Ha ocurrido un error al crear una venta."
+                    err.message || "Ha ocurrido un error al crear el libro."
             });
         });
 };
 
 exports.findOne = (req, res) => {
     const id = req.params.id;
-    Ventas.findByPk(id)
+    Libros.findByPk(id)
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error al obtener venta con id=" + id
+                message: "Error al obtener libro con id=" + id
             });
         });
 };
 
 exports.findAll = (req, res) => {
     const nombre = req.query.nombre;
-    var condition = nombre ? { cliente: { [Op.iLike]: `%${nombre}%` } } : null;
-    Ventas.findAll({ where: condition })
+    var condition = nombre ? { titulo: { [Op.iLike]: `%${nombre}%` } } : null;
+    Libros.findAll({ where: condition })
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Ocurrio un error al obtener las ventas."
+                    err.message || "Ocurrio un error al obtener los libros."
             });
         });
 };
 
 exports.delete = (req, res) => {
     const id = req.params.id;
-    Ventas.destroy({ where: { id: id } })
+    Libros.destroy({ where: { id: id } })
         .then(() => {
-            res.send({ message: 'Venta eliminada exitosamente.' });
+            res.send({ message: 'Libros eliminado exitosamente.' });
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error al eliminar venta con id=" + id
+                message: "Error al eliminar libro con id=" + id
             });
         });
 };
 
 exports.update = (req, res) => {
     const id = req.params.id;
-    Ventas.findByPk(id)
-        .then(venta => {
-            if (!venta) {
-                return res.status(404).send({ message: "Venta no encontrada." });
+    Libros.findByPk(id)
+        .then(libro => {
+            if (!libro) {
+                return res.status(404).send({ message: "Libro no encontrado." });
             }
 
             // Actualiza los campos con los datos del cuerpo de la solicitud
-            venta.cliente = req.body.cliente;
-            console.log('venta.cliente', venta.cliente)
-            venta.factura = req.body.factura;
-            console.log('venta.factura', venta.factura)
-            venta.total = req.body.total;
-            console.log('venta.total', venta.total)
+            libro.titulo = req.body.titulo;
+            console.log('libro.titulo', libro.titulo)
+            libro.autor = req.body.autor;
+            console.log('libro.autor', libro.autor)
+            libro.editorial = req.body.editorial;
+            console.log('libro.editorial', libro.editorial)
 
             // Guarda la venta actualizada
-            venta.save()
+            libro.save()
                 .then(data => {
                     res.send(data);
                 })
                 .catch(err => {
                     res.status(500).send({
-                        message: "Error al actualizar la venta con id=" + id
+                        message: "Error al actualizar el libro con id=" + id
                     });
                 });
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error al obtener venta con id=" + id
+                message: "Error al obtener libro con id=" + id
             });
         });
 };
