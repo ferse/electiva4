@@ -9,6 +9,18 @@ exports.create = (req, res) => {
         });
         return;
     }
+    if (!req.body.autor) {
+        res.status(400).send({
+            message: "Debe enviar el autor del libro!"
+        });
+        return;
+    }
+    if (!req.body.editorial) {
+        res.status(400).send({
+            message: "Debe enviar la editorial del libro!"
+        });
+        return;
+    }
     // crea una venta
     const libro = {
         titulo: req.body.titulo,
